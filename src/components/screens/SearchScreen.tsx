@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   btn: {
-    position: 'absolute',
+    position: 'relative',
     width: '100%',
     borderWidth: 1,
     paddingVertical: 20,
@@ -96,7 +96,7 @@ const SearchScreen: FC = () => {
     <Formik initialValues={initialFormValues} onSubmit={onSubmit}>
       {({ handleSubmit }) => (
         <>
-          <ScrollView style={styles.container} contentInset={{bottom: 30}}>
+          <ScrollView contentContainerStyle={styles.container} contentInset={{bottom: 30}}>
             <View>
               <Title/>
               <FormikInput fieldName={ExerciseFormFields.name}/>

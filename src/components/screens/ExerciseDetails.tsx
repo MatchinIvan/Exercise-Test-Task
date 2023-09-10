@@ -64,8 +64,10 @@ const ExerciseDetailsScreen: FC<ExerciseDetailsProp> = ({route}) => {
           <Text style={styles.text}>{muscle}</Text>
         </View>
       </View>
-      <Text style={styles.subTitle}>Instructions:</Text>
-      <Text style={styles.instructionsText}>{instructions}</Text>
+      {!!instructions && <>
+        <Text style={styles.subTitle}>Instructions:</Text>
+        <Text style={styles.instructionsText}>{instructions}</Text>
+      </>}
     </View>
   );
 };

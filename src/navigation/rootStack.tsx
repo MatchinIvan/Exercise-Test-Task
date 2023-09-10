@@ -21,7 +21,8 @@ const RootStack: FC = () => {
         headerTitleStyle: {
           color: colors.green,
           fontWeight: 'bold'
-        }
+        },
+        headerTitleAlign: 'center'
       }}>
         <Root.Screen
           options={{headerShown: false}}
