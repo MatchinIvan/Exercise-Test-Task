@@ -1,19 +1,25 @@
-import React, { FC } from 'react';
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { colors } from '../../styles/colors';
-import { useAppSelector } from '../../store';
-import { ExerciseSelectors } from '../../store/selectors/exercise';
+import React, {FC} from 'react';
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import {colors} from '../../styles/colors';
+import {useAppSelector} from '../../store';
+import {ExerciseSelectors} from '../../store/selectors/exercise';
 import Icon from '../ui/Icon';
-import { Icons } from '../../constants/assets/icons';
-import { useNavigation } from '@react-navigation/native';
-import { RootNavigation, RootRouteList } from '../../navigation/types';
-import { ExerciseResponse } from '../../types/exercise';
+import {Icons} from '../../constants/assets/icons';
+import {useNavigation} from '@react-navigation/native';
+import {RootNavigation, RootRouteList} from '../../navigation/types';
+import {ExerciseResponse} from '../../types/exercise';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.black,
-    padding: 20
+    padding: 20,
   },
   title: {
     color: colors.white,
@@ -31,7 +37,7 @@ const styles = StyleSheet.create({
     borderColor: colors.grey,
     borderRadius: 4,
     backgroundColor: colors.grey,
-    marginVertical: 5
+    marginVertical: 5,
   },
   cardSubContainer: {
     flexGrow: 1,
@@ -45,7 +51,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     marginTop: 10,
     marginBottom: 5,
-    backgroundColor: colors.green
+    backgroundColor: colors.green,
   },
   diffLabel: {
     paddingHorizontal: 10,
@@ -53,11 +59,11 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     textTransform: 'capitalize',
     color: colors.black,
-    backgroundColor: colors.green
+    backgroundColor: colors.green,
   },
   icon: {
-    alignSelf: 'center'
-  }
+    alignSelf: 'center',
+  },
 });
 
 const SearchResultScreen: FC = () => {
@@ -66,8 +72,8 @@ const SearchResultScreen: FC = () => {
   const navigator = useNavigation<RootNavigation>();
 
   const onPress = (data: ExerciseResponse) => () => {
-    navigator.navigate(RootRouteList.ExerciseDetails, { data });
-  }
+    navigator.navigate(RootRouteList.ExerciseDetails, {data});
+  };
 
   return (
     <View style={styles.container}>
@@ -75,13 +81,16 @@ const SearchResultScreen: FC = () => {
       <ScrollView contentInset={{bottom: 20}}>
         {exerciseList.map((elem, i) => {
           return (
-            <TouchableOpacity onPress={onPress(elem)} key={elem.name + i} style={styles.card}>
+            <TouchableOpacity
+              onPress={onPress(elem)}
+              key={elem.name + i}
+              style={styles.card}>
               <View style={styles.cardSubContainer}>
                 <Text style={styles.carLabel}>{elem?.name}</Text>
               </View>
-              <Icon styles={styles.icon} icon={Icons.rightWhiteArrow}/>
+              <Icon styles={styles.icon} icon={Icons.rightWhiteArrow} />
             </TouchableOpacity>
-          )
+          );
         })}
       </ScrollView>
     </View>

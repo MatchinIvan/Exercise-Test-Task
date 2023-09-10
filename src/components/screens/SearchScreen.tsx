@@ -1,20 +1,31 @@
-import React, { FC, useCallback, useEffect, useState } from 'react';
-import { ActivityIndicator, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { colors } from '../../styles/colors';
-import { withSafeArea } from '../../hocs/withSafeArea';
-import { useAppDispatch, useAppSelector } from '../../store';
-import { getExerciseList } from '../../store/thunks/exercise';
+import React, {FC, useCallback, useEffect, useState} from 'react';
+import {
+  ActivityIndicator,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import {colors} from '../../styles/colors';
+import {withSafeArea} from '../../hocs/withSafeArea';
+import {useAppDispatch, useAppSelector} from '../../store';
+import {getExerciseList} from '../../store/thunks/exercise';
 import FormikInput from '../ui/FormikInput';
-import { Formik } from 'formik';
-import { ExerciseFormFields, ExerciseRequestOptions } from '../../types/exercise';
+import {Formik} from 'formik';
+import {ExerciseFormFields, ExerciseRequestOptions} from '../../types/exercise';
 import Title from '../ui/Title';
 import LabelButton from '../ui/LabelBtn';
-import { Icons } from '../../constants/assets/icons';
+import {Icons} from '../../constants/assets/icons';
 import OptionsPicker from '../ui/OptionsPicker';
-import { ExerciseDifficulty, ExerciseMuscle, ExerciseType } from '../../constants/exerciseParams';
-import { useNavigation } from '@react-navigation/native';
-import { RootNavigation, RootRouteList } from '../../navigation/types';
-import { ExerciseSelectors } from '../../store/selectors/exercise';
+import {
+  ExerciseDifficulty,
+  ExerciseMuscle,
+  ExerciseType,
+} from '../../constants/exerciseParams';
+import {useNavigation} from '@react-navigation/native';
+import {RootNavigation, RootRouteList} from '../../navigation/types';
+import {ExerciseSelectors} from '../../store/selectors/exercise';
 import ErrorModal from '../ui/ErrorModal';
 
 const styles = StyleSheet.create({
@@ -22,7 +33,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 20,
     paddingTop: 30,
-    backgroundColor: colors.black
+    backgroundColor: colors.black,
   },
   btnContainer: {
     padding: 20,
@@ -43,12 +54,12 @@ const styles = StyleSheet.create({
   btnLabel: {
     color: colors.black,
     fontSize: 18,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
   loader: {
     position: 'absolute',
     right: 50,
-  }
+  },
 });
 
 const initialFormValues: ExerciseRequestOptions = {
@@ -56,7 +67,7 @@ const initialFormValues: ExerciseRequestOptions = {
   type: undefined,
   muscle: undefined,
   difficulty: undefined,
-}
+};
 
 const SearchScreen: FC = () => {
   const [visibleOptions, setOptionsVisible] = useState(false);
@@ -69,41 +80,43 @@ const SearchScreen: FC = () => {
 
   const toggleOptionsVision = useCallback(() => {
     setOptionsVisible(!visibleOptions);
-  }, [visibleOptions, setOptionsVisible])
+  }, [visibleOptions, setOptionsVisible]);
 
   const toggleModalVisibleState = (bool: boolean) => {
     showModal(bool);
-  }
+  };
 
   const onSubmit = async (values: ExerciseRequestOptions) => {
     await dispatch(getExerciseList(values));
 
-    if(data.length === 0){
+    if (data.length === 0) {
       toggleModalVisibleState(true);
       return;
     }
 
-    if(!loading){
-      navigation.navigate(RootRouteList.SearchResult)
+    if (!loading) {
+      navigation.navigate(RootRouteList.SearchResult);
     }
-  }
+  };
 
   const formSubmitHandler = (handler: () => void) => () => {
     handler();
-  }
+  };
 
   useEffect(() => {
     dispatch(getExerciseList({}));
-  }, [])
+  }, []);
 
   return (
     <Formik initialValues={initialFormValues} onSubmit={onSubmit}>
-      {({ handleSubmit }) => (
+      {({handleSubmit}) => (
         <>
-          <ScrollView contentContainerStyle={styles.container} contentInset={{bottom: 30}}>
+          <ScrollView
+            contentContainerStyle={styles.container}
+            contentInset={{bottom: 30}}>
             <View>
-              <Title/>
-              <FormikInput fieldName={ExerciseFormFields.name}/>
+              <Title />
+              <FormikInput fieldName={ExerciseFormFields.name} />
               <LabelButton
                 label={'Advanced Options'}
                 onPress={toggleOptionsVision}
@@ -113,9 +126,21 @@ const SearchScreen: FC = () => {
             </View>
             {visibleOptions && (
               <>
-                <OptionsPicker label={'Type'} data={ExerciseType} fieldName={'type'}/>
-                <OptionsPicker label={'Muscle'} data={ExerciseMuscle} fieldName={'muscle'}/>
-                <OptionsPicker label={'Difficulty'} data={ExerciseDifficulty} fieldName={'difficulty'}/>
+                <OptionsPicker
+                  label={'Type'}
+                  data={ExerciseType}
+                  fieldName={'type'}
+                />
+                <OptionsPicker
+                  label={'Muscle'}
+                  data={ExerciseMuscle}
+                  fieldName={'muscle'}
+                />
+                <OptionsPicker
+                  label={'Difficulty'}
+                  data={ExerciseDifficulty}
+                  fieldName={'difficulty'}
+                />
               </>
             )}
           </ScrollView>
@@ -123,13 +148,21 @@ const SearchScreen: FC = () => {
             <TouchableOpacity
               activeOpacity={0.7}
               style={styles.btn}
-              onPress={formSubmitHandler(handleSubmit)}
-            >
+              onPress={formSubmitHandler(handleSubmit)}>
               <Text style={styles.btnLabel}>Search</Text>
-              {loading && <ActivityIndicator style={styles.loader} size={'large'} color={colors.black}/>}
+              {loading && (
+                <ActivityIndicator
+                  style={styles.loader}
+                  size={'large'}
+                  color={colors.black}
+                />
+              )}
             </TouchableOpacity>
           </View>
-          <ErrorModal closeModal={toggleModalVisibleState} isVisible={modalVisible}/>
+          <ErrorModal
+            closeModal={toggleModalVisibleState}
+            isVisible={modalVisible}
+          />
         </>
       )}
     </Formik>

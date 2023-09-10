@@ -1,7 +1,7 @@
-import React, { FC } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, {FC} from 'react';
+import {StyleSheet, Text, View} from 'react-native';
 import Modal from 'react-native-modal';
-import { colors } from '../../styles/colors';
+import {colors} from '../../styles/colors';
 
 const styles = StyleSheet.create({
   container: {
@@ -20,13 +20,13 @@ const styles = StyleSheet.create({
     color: colors.black,
     fontWeight: 'bold',
     fontSize: 18,
-    marginBottom: 30
+    marginBottom: 30,
   },
   text: {
     color: colors.black,
     fontWeight: '600',
     fontSize: 14,
-  }
+  },
 });
 
 interface ErrorModalProps {
@@ -36,15 +36,20 @@ interface ErrorModalProps {
 
 const ErrorModal: FC<ErrorModalProps> = ({isVisible, closeModal}) => {
   const handleClosingModal = () => {
-    closeModal(false)
-  }
+    closeModal(false);
+  };
 
   return (
     <View style={styles.container}>
-      <Modal style={styles.container} isVisible={isVisible} onBackdropPress={handleClosingModal}>
+      <Modal
+        style={styles.container}
+        isVisible={isVisible}
+        onBackdropPress={handleClosingModal}>
         <View style={styles.subContainer}>
           <Text style={styles.title}>Oops !</Text>
-          <Text style={styles.text}>No results were found with these parameters</Text>
+          <Text style={styles.text}>
+            No results were found with these parameters
+          </Text>
         </View>
       </Modal>
     </View>

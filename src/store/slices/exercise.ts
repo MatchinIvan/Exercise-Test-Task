@@ -1,15 +1,15 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { getExerciseList } from '../thunks/exercise';
-import { ExerciseResponse } from '../../types/exercise';
+import {createSlice} from '@reduxjs/toolkit';
+import {getExerciseList} from '../thunks/exercise';
+import {ExerciseResponse} from '../../types/exercise';
 
 export interface ExerciseInitialStateType {
-  data: ExerciseResponse[],
+  data: ExerciseResponse[];
   loading: boolean;
 }
 
 const initialExerciseState: ExerciseInitialStateType = {
   data: [],
-  loading: false
+  loading: false,
 };
 
 export const ExerciseSlice = createSlice({
@@ -18,25 +18,31 @@ export const ExerciseSlice = createSlice({
   reducers: {
     clear: () => {
       return {
-        ...initialExerciseState
-      }
-    }
+        ...initialExerciseState,
+      };
+    },
   },
   extraReducers: builder => {
     builder
       .addCase(getExerciseList.fulfilled, (state, action) => {
         return {
           data: action.payload as ExerciseResponse[],
-          loading: false
-        }
+          loading: false,
+        };
       })
       .addCase(getExerciseList.pending, () => {
         return {
           data: [],
-          loading: true
-        }
+          loading: true,
+        };
       })
-  }
+      .addCase(getExerciseList.rejected, () => {
+        return {
+          data: [],
+          loading: false,
+        };
+      });
+  },
 });
 
 export const ExerciseListActions = ExerciseSlice.actions;

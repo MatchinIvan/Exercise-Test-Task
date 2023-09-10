@@ -1,8 +1,8 @@
-import React, { FC, useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { useFormikField } from '../../hooks/useFormikField';
-import { StringSerializer } from '../../services/helpers/stringHelpers';
-import { colors } from '../../styles/colors';
+import React, {FC, useState} from 'react';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {useFormikField} from '../../hooks/useFormikField';
+import {StringSerializer} from '../../services/helpers/stringHelpers';
+import {colors} from '../../styles/colors';
 
 const styles = StyleSheet.create({
   container: {
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     marginTop: 8,
     marginBottom: 12,
     color: colors.white,
-    fontWeight: '600'
+    fontWeight: '600',
   },
   option: {
     borderWidth: 1,
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     margin: 5,
     paddingVertical: 2,
     paddingHorizontal: 5,
-    backgroundColor: colors.lightGray
+    backgroundColor: colors.lightGray,
   },
   activeOption: {
     borderColor: colors.green,
@@ -36,10 +36,10 @@ const styles = StyleSheet.create({
   optionLabel: {
     textTransform: 'capitalize',
     fontWeight: '600',
-    color: colors.white
+    color: colors.white,
   },
   activeOptionLabel: {
-    color: colors.black
+    color: colors.black,
   },
   clearBtn: {
     marginLeft: 20,
@@ -58,8 +58,8 @@ const styles = StyleSheet.create({
   },
   row: {
     alignItems: 'center',
-    flexDirection: 'row'
-  }
+    flexDirection: 'row',
+  },
 });
 
 interface OptionsPicker {
@@ -72,35 +72,40 @@ const OptionsPicker: FC<OptionsPicker> = ({label, data, fieldName}) => {
   const [active, setActive] = useState('');
   const pickerValues = Object.values(data);
 
-  const { helpers } = useFormikField(fieldName);
+  const {helpers} = useFormikField(fieldName);
 
-  const handleChange =  (value: string) => async () => {
-    await helpers.setValue(value)
+  const handleChange = (value: string) => async () => {
+    await helpers.setValue(value);
     setActive(value);
-  }
+  };
 
   return (
     <View style={styles.container}>
       <View style={styles.row}>
         <Text style={styles.title}>{`${label}:`}</Text>
-        {!!active && <TouchableOpacity style={styles.clearBtn} onPress={handleChange('')}>
-          <Text style={styles.clearBtnLabel}>Clear</Text>
-        </TouchableOpacity>}
+        {!!active && (
+          <TouchableOpacity style={styles.clearBtn} onPress={handleChange('')}>
+            <Text style={styles.clearBtnLabel}>Clear</Text>
+          </TouchableOpacity>
+        )}
       </View>
       <View style={styles.subContainer}>
         {pickerValues.map((optionLabel, i) => {
           const isActive = optionLabel === active;
           return (
             <TouchableOpacity
-              key={optionLabel as string + i}
+              key={(optionLabel as string) + i}
               style={[styles.option, isActive && styles.activeOption]}
-              onPress={handleChange(optionLabel as string)}
-            >
-              <Text style={[styles.optionLabel, isActive && styles.activeOptionLabel]}>
+              onPress={handleChange(optionLabel as string)}>
+              <Text
+                style={[
+                  styles.optionLabel,
+                  isActive && styles.activeOptionLabel,
+                ]}>
                 {StringSerializer.enumToString(optionLabel as string)}
               </Text>
             </TouchableOpacity>
-          )
+          );
         })}
       </View>
     </View>

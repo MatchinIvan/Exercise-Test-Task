@@ -1,14 +1,12 @@
-import React, { FC } from 'react';
-import { Image, ImageProps, ImageStyle } from 'react-native';
+import React, {FC} from 'react';
+import {Image, ImageProps, ImageStyle} from 'react-native';
 interface IconProps {
-  icon: ImageProps,
+  icon: ImageProps;
   styles?: ImageStyle;
 }
 
 const Icon: FC<IconProps> = ({icon, styles}) => {
-  return (
-    <Image style={styles} source={icon}/>
-  );
+  return <Image style={styles} source={icon} />;
 };
 
 export default Icon;

@@ -1,16 +1,20 @@
-import { ExerciseDifficulty, ExerciseMuscle, ExerciseType } from '../../constants/exerciseParams';
+import {
+  ExerciseDifficulty,
+  ExerciseMuscle,
+  ExerciseType,
+} from '../../constants/exerciseParams';
 
 export enum ExerciseFormFields {
   name = 'name',
   type = 'type',
   muscle = 'muscle',
-  difficulty = 'difficulty'
+  difficulty = 'difficulty',
 }
 interface ExerciseOption {
   name: string;
   type: ExerciseType;
   muscle: ExerciseMuscle;
-  difficulty: ExerciseDifficulty
+  difficulty: ExerciseDifficulty;
 }
 
 export type ExerciseRequestOptions = Partial<ExerciseOption>;

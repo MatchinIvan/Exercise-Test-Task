@@ -1,6 +1,6 @@
-import React, { FC } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { colors } from '../../styles/colors';
+import React, {FC} from 'react';
+import {StyleSheet, Text, View} from 'react-native';
+import {colors} from '../../styles/colors';
 
 const styles = StyleSheet.create({
   container: {
@@ -10,11 +10,11 @@ const styles = StyleSheet.create({
   labelTxt: {
     color: colors.white,
     fontWeight: 'bold',
-    fontSize: 16
-  }
+    fontSize: 16,
+  },
 });
 
-const TITLE = 'Write exercise name'
+const TITLE = 'Write exercise name';
 
 const Title: FC = () => {
   return (

@@ -1,13 +1,13 @@
-import React, { FC } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { colors } from '../../styles/colors';
-import { ExerciseDetailsProp } from '../../navigation/types';
+import React, {FC} from 'react';
+import {StyleSheet, Text, View} from 'react-native';
+import {colors} from '../../styles/colors';
+import {ExerciseDetailsProp} from '../../navigation/types';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.black,
-    padding: 20
+    padding: 20,
   },
   title: {
     alignSelf: 'center',
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     margin: 5,
     paddingVertical: 2,
     paddingHorizontal: 5,
-    backgroundColor: colors.lightGray
+    backgroundColor: colors.lightGray,
   },
   rowContainer: {
     marginVertical: 15,
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
   },
-  text:{
+  text: {
     textTransform: 'capitalize',
     color: colors.white,
   },
@@ -45,11 +45,13 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     fontSize: 14,
     color: colors.white,
-  }
+  },
 });
 
 const ExerciseDetailsScreen: FC<ExerciseDetailsProp> = ({route}) => {
-  const { data: {name, type, muscle, difficulty, instructions}} = route.params;
+  const {
+    data: {name, type, muscle, difficulty, instructions},
+  } = route.params;
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{name}</Text>
@@ -64,10 +66,12 @@ const ExerciseDetailsScreen: FC<ExerciseDetailsProp> = ({route}) => {
           <Text style={styles.text}>{muscle}</Text>
         </View>
       </View>
-      {!!instructions && <>
-        <Text style={styles.subTitle}>Instructions:</Text>
-        <Text style={styles.instructionsText}>{instructions}</Text>
-      </>}
+      {!!instructions && (
+        <>
+          <Text style={styles.subTitle}>Instructions:</Text>
+          <Text style={styles.instructionsText}>{instructions}</Text>
+        </>
+      )}
     </View>
   );
 };
