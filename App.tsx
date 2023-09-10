@@ -1,16 +1,16 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import RootStack from './src/navigation/rootStack';
-import { SafeAreaView, StatusBar } from 'react-native';
+import { Provider } from 'react-redux';
+import { store } from './src/store';
 
 function App() {
   return (
-    <SafeAreaView>
-      <StatusBar barStyle={'dark-content'}/>
-        <NavigationContainer>
-          <RootStack/>
-        </NavigationContainer>
-    </SafeAreaView>
+    <Provider store={store}>
+      <NavigationContainer>
+        <RootStack/>
+      </NavigationContainer>
+    </Provider>
   );
 }
 

@@ -1,8 +1,8 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
 import { StringifiableRecord } from 'query-string';
 import { stringifyUrl } from 'query-string/base';
-import { BASE_URL, Endpoint } from '../../constants';
-import env from 'react-native-dotenv';
+import { BASE_URL } from '../../constants';
+import { API_KEY } from '@env';
 
 class Network {
   private axiosInstance: AxiosInstance;
@@ -12,7 +12,7 @@ class Network {
     this.axiosInstance = axios.create({
       baseURL: baseUrl,
       headers: {
-        'X-Api-Key': env.API_KEY
+        'X-Api-Key': API_KEY
       }
     })
   }
@@ -35,4 +35,4 @@ class Network {
   }
 }
 
-export const NetworkService = new Network(`${BASE_URL}${Endpoint.exercises}`);
+export const NetworkService = new Network(`${BASE_URL}`);
