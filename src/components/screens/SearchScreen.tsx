@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useState } from 'react';
+import React, { FC, useCallback, useEffect, useState } from 'react';
 import { ActivityIndicator, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { colors } from '../../styles/colors';
 import { withSafeArea } from '../../hocs/withSafeArea';
@@ -91,6 +91,10 @@ const SearchScreen: FC = () => {
   const formSubmitHandler = (handler: () => void) => () => {
     handler();
   }
+
+  useEffect(() => {
+    dispatch(getExerciseList({}));
+  }, [])
 
   return (
     <Formik initialValues={initialFormValues} onSubmit={onSubmit}>
