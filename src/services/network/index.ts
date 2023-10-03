@@ -28,7 +28,7 @@ class Network {
 
       return response.data;
     } catch (error) {
-      throw error;
+      throw new Error();
     }
   }
 }
