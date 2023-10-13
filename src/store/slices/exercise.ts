@@ -1,13 +1,13 @@
-import {createSlice} from '@reduxjs/toolkit';
-import {getExerciseList} from '../thunks/exercise';
-import {ExerciseResponse} from '../../types/exercise';
+import { createSlice } from '@reduxjs/toolkit';
+import { getExerciseList } from '../thunks/exercise';
+import { ExerciseResponse } from '../../types/exercise';
 
 export interface ExerciseInitialStateType {
   data: ExerciseResponse[];
   loading: boolean;
 }
 
-const initialExerciseState: ExerciseInitialStateType = {
+export const initialExerciseState: ExerciseInitialStateType = {
   data: [],
   loading: false,
 };

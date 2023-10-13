@@ -1,7 +1,7 @@
-import {createAsyncThunk} from '@reduxjs/toolkit';
-import {NetworkService} from '../../services/network';
-import {Endpoint} from '../../constants';
-import {ExerciseRequestOptions, ExerciseResponse} from '../../types/exercise';
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import { NetworkService } from '../../services/network';
+import { Endpoint } from '../../constants';
+import { ExerciseRequestOptions, ExerciseResponse } from '../../types/exercise';
 
 export const getExerciseList = createAsyncThunk(
   'exercise/getList',

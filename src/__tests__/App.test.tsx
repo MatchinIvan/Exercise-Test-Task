@@ -1,10 +1,11 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { renderWithProviders } from '../utils/test-utils';
 import App from '../../App';
 
 describe('App', () => {
-  test('Is component renders correctly', () => {
-    const tree = renderer.create(<App />).toJSON();
-    expect(tree).toMatchSnapshot();
+  test('Is component renders correctly', async () => {
+    const rootComponentSnapshot = renderWithProviders(<App />).toJSON();
+
+    expect(rootComponentSnapshot).toMatchSnapshot();
   });
 });
